@@ -70,12 +70,23 @@ app.post("/noticias", (req, res) => {
   res.status(201).json({ mensagem: "Notícia criada", noticia: novaNoticia });
 });
 
+// GET: listar categorias
+app.get("/noticias/categorias", (req, res) => {
+  const categorias = [...new Set(noticias.map(n => n.categoria))];
+  res.json({
+    mensagem: "Categorias carregadas",
+    total: categorias.length,
+    categorias: categorias
+  });
+});
+
 // Health check
 app.get("/", (req, res) => {
   res.json({
-    status: "Backend de Notícias rodando",
-    versao: "1.0.0",
-    cors_ativo: true
+    status: "Backend de Notícias rodando com CI/CD",
+    versao: "1.1.0",
+    cors_ativo: true,
+    frontend_integrado: true
   });
 });
 
